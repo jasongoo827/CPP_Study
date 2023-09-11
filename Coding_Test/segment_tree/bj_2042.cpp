@@ -5,17 +5,17 @@
 using namespace std;
 
 int n, m, k;
-int arr[MAX];
-int tree[MAX * 4];
+long long arr[MAX];
+long long tree[MAX * 4];
 
-int init(int start, int end, int node)
+long long init(int start, int end, int node)
 {
     if (start == end) return tree[node] = arr[start];
     int mid = (start + end) / 2;
     return tree[node] = init(start, mid, node * 2) + init(mid + 1, end, node * 2 + 1);
 }
 
-int sum(int start, int end, int node, int left, int right)
+long long sum(int start, int end, int node, int left, int right)
 {
     if (left > end || right < start) return 0;
     if (left <= start && right >= end) return tree[node];
@@ -23,7 +23,7 @@ int sum(int start, int end, int node, int left, int right)
     return sum(start, mid, node * 2, left, right) + sum(mid + 1, end, node * 2 + 1, left, right);
 }
 
-void update(int start, int end, int node, int index, int diff)
+void update(int start, int end, int node, int index, long long diff)
 {
     if (index < start || index > end) return;
     tree[node] += diff;
@@ -35,7 +35,7 @@ void update(int start, int end, int node, int index, int diff)
 
 void input()
 {
-    int a, b, c;
+    long long a, b, c;
 
     for (int i = 0; i < n; ++i)
         cin >> arr[i];
@@ -46,7 +46,8 @@ void input()
         cin >> a >> b >> c;
         if (a == 1)
         {
-            int diff = c - arr[b - 1];
+            long long diff = c - arr[b - 1];
+            arr[b - 1] = c;
             update(0, n - 1, 1, b - 1, diff);
         }
         else if (a == 2)
@@ -63,4 +64,6 @@ int main(void)
     cin >> n >> m >> k;
 
     input();
+
+    return (0);
 }
