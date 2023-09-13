@@ -67,6 +67,5 @@ int main(void)
         cout << s.top();
         s.pop();
     }
-
     return (0);
 }
