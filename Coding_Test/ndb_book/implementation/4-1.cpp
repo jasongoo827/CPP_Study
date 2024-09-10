@@ -52,5 +52,6 @@ int main()
 			continue ;
 		x = nx, y = ny;
 	}
+	
 	cout << x << " " << y << endl;
 }
