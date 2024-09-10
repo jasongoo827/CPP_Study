@@ -9,21 +9,16 @@ int main(void)
 {
 	cin >> n >> k;
 	
-	while (n >= k)
+	while (true)
 	{
-		while (n % k != 0)
-		{
-			n -= 1;
-			ret += 1;
-		}
+		int target = (n / k) * k;
+		ret += (n - target);
+		if (n < k)
+			break ;
+		ret += 1;
 		n /= k;
-		ret += 1;
 	}
-	while (n > 1)
-	{
-		n -= 1;
-		ret += 1;
-	}
+	ret += (n - 1);
 	cout << ret << endl;
 	return (0);
 }
