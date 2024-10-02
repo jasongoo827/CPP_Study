@@ -32,7 +32,7 @@ int main(void)
 	for (int i = 0; i < n; ++i)
 	{
 		for (int j = arr[i]; j <= m; ++j)
-			if (dp[j - arr[i]] != 1e9)
+			if (dp[j - arr[i]] != 1e9) // 없애도 되는 코드
 				dp[i] = min(dp[i], dp[i - k] + 1); 
 	}
 
