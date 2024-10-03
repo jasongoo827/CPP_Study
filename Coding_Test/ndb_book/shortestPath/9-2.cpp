@@ -1,37 +1,39 @@
 #include <iostream>
 #include <vector>
-#include <utility>
 #include <queue>
+#include <utility>
 
+#define MAX_N 30001
 #define INF 1e9
 
 using namespace std;
 
-int n, m, start;
-vector<pair<int, int> > graph[100001];
-int d[100001];
+int n, m, c;
+vector<pair<int, int> > graph[MAX_N];
+int d[MAX_N];
 
 void dijkstra(int start)
 {
 	priority_queue<pair<int, int> > pq;
-
 	pq.push({0, start});
 	d[start] = 0;
+
 	while (!pq.empty())
 	{
 		int dist = -pq.top().first;
 		int here = pq.top().second;
+
 		pq.pop();
 
 		if (d[here] < dist) continue;
 		for (size_t i = 0; i < graph[here].size(); ++i)
 		{
 			int there = graph[here][i].first;
-			int cost = dist + graph[here][i].second;
+			int cost = graph[here][i].second + dist;
 			if (cost < d[there])
 			{
 				d[there] = cost;
-				pq.push(make_pair(-cost, there));
+				pq.push({-cost, there});
 			}
 		}
 	}
@@ -39,23 +41,26 @@ void dijkstra(int start)
 
 int main(void)
 {
-	cin >> n >> m >> start;
-	
+	cin >> n >> m >> c;
+
 	for (int i = 0; i < m; ++i)
 	{
 		int a, b, c;
 		cin >> a >> b >> c;
 		graph[a].push_back({b, c});
 	}
+	fill_n(d, d + MAX_N, INF);
+	dijkstra(c);
 
-	fill_n(d, d + 100001, INF);
-
-	dijkstra(start);
-	for (int i = 1; i <= n; ++i)
+	int cnt = 0;
+	int ret = -1;
+	for (int i = 0; i < n; ++i)
 	{
-		if (d[i] == INF)
-			cout << "INFINITY\n";
-		else
-			cout << d[i] << '\n';
+		if (d[i] != INF)
+		{
+			cnt++;
+			ret = max(ret, d[i]);
+		}
 	}
+	cout << cnt - 1<< " " << ret << '\n';
 }
