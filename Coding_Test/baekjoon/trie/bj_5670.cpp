@@ -4,6 +4,9 @@
 
 #define MAX 26
 
+// 각 node를 <char, int> 형태의 map으로 저장하면 효율적일 듯
+// vector에 push_back 말고, emplace_back을 사용하면 좀 더 최적화 가능(임시 객체 생성 여부)
+
 using namespace std;
 
 int n;
