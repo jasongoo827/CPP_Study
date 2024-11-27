@@ -7,12 +7,15 @@ using namespace std;
 
 int n, m;
 int map[MAX][MAX];
+// 벽 부수는 여부에 따른 방문 배열 + cnt 배열
+// 메모리 관점에서 시간복잡도를 생각하자.
 int visited[2][MAX][MAX];
 int dy[4] = {-1, 1, 0, 0};
 int dx[4] = {0, 0, -1, 1};
 
 void bfs()
 {
+    // 한번에 관리하는 것보다 나눠 하는 게 좀 더 효율적이다.
     queue<pair<int, int>> q;
     queue<int> skipq;
     q.push({1, 1});
