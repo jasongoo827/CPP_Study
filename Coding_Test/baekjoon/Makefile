@@ -20,5 +20,15 @@ file: $(CPP_FILE)
 $(CPP_FILE): $(TXT_FILE)
 	cp $(TXT_FILE) $(CPP_FILE)
 
+# 문제 번호별 파일 생성 (디렉토리 생성 없이)
+problem:
+ifndef NUM
+	$(error NUM is not set. Usage: make problem NUM=1234)
+endif
+	cp $(TXT_FILE) $(NUM).cpp
+	@echo "Created $(NUM).cpp"
+
 clean:
-	rm -f $(TARGET)
+	rm -f $(TARGET) *.cpp
+
+.PHONY: all file problem clean
